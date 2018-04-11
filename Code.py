@@ -4,8 +4,8 @@ import sys, tty, termios, signal
 
 # Definitions
 
-# pin 1 = left 500-1190
-# pin 2 = right 1810-2500
+# pin 1 = left claw
+# pin 2 = right claw
 
 def stopAll():
     pass
@@ -14,20 +14,29 @@ def open():
   RPL.servoWrite(0, 500)
   RPL.servoWrite(1, 2500)
   print "open"
+  print "Left" RPL.servoRead(0)
+  print "Right" RPL.servoRead(1)
 
 def close():
   RPL.servoWrite(0, 1000)
   RPL.servoWrite(1, 2000)
   print "close"
+  print "Left" RPL.servoRead(0)
+  print "Right" RPL.servoRead(1)
 
-i = RPL.servoRead(0)
-j = RPL.servoRead(1)
+I = RPL.servoRead(0)
+J = RPL.servoRead(1)
 
 def stepclose():
-    RPL.servoWrite(0,i+10)
-    RPL.servoWrite(1,j-10)
+    RPL.servoWrite(0,I+10)
+    RPL.servoWrite(1,J-10)
     print "step close"
+    print "Left" RPL.servoRead(0)
+    print "Right" RPL.servoRead(1)
 
+def show():
+    print "Left" RPL.servoRead(0)
+    print "Right" RPL.servoRead(1)
 
 fd = sys.stdin.fileno()
 old_settings = termios.tcgetattr(fd)
@@ -53,11 +62,13 @@ while True:
     termios.tcsetattr(fd, termios.TCSADRAIN, old_settings) # this resets the console settings
     break
   else:
-    if ch == 'w':
+    if ch == '1':
       open()
-    elif ch == "a":
+    elif ch == "2":
       close()
-    elif ch == "s":
+    elif ch == "3":
       stepclose()
+    elif ch == "P":
+      show()
     else:
       stopAll()
