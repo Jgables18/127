@@ -11,32 +11,32 @@ def stopAll():
     pass
 
 def open():
-  RPL.servoWrite(0, 500)
-  RPL.servoWrite(1, 2500)
-  print "open"
-  print "Left" RPL.servoRead(0)
-  print "Right" RPL.servoRead(1)
+    RPL.servoWrite(0, 500)
+    RPL.servoWrite(1, 2500)
+    print "open"
+    print RPL.servoRead(0)
+    print RPL.servoRead(1)
 
 def close():
-  RPL.servoWrite(0, 1000)
-  RPL.servoWrite(1, 2000)
-  print "close"
-  print "Left" RPL.servoRead(0)
-  print "Right" RPL.servoRead(1)
+    RPL.servoWrite(0, 1000)
+    RPL.servoWrite(1, 2000)
+    print "close"
+    print RPL.servoRead(0)
+    print RPL.servoRead(1)
 
-I = RPL.servoRead(0)
-J = RPL.servoRead(1)
+i = RPL.servoRead(0)
+j = RPL.servoRead(1)
 
 def stepclose():
     RPL.servoWrite(0,I+10)
     RPL.servoWrite(1,J-10)
     print "step close"
-    print "Left" RPL.servoRead(0)
-    print "Right" RPL.servoRead(1)
+    print RPL.servoRead(0)
+    print RPL.servoRead(1)
 
 def show():
-    print "Left" RPL.servoRead(0)
-    print "Right" RPL.servoRead(1)
+    print RPL.servoRead(0)
+    print RPL.servoRead(1)
 
 fd = sys.stdin.fileno()
 old_settings = termios.tcgetattr(fd)
